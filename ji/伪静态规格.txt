@@ -1,0 +1,11 @@
+Î±¾²Ì¬¹æ¸ñ
+
+{id}-{dirname}.html
+
+{id}-{dirname}-p-{page}.html
+
+show-{id}.html
+
+show-{id}-p-{page}.html
+
+extend-{id}.html

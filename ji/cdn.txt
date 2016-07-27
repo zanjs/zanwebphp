@@ -1,0 +1,26 @@
+query的几个CDN加速点
+
+谷歌jquery cdn加速点
+http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js
+
+微软jquery cdn加速点
+http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.2.min.js
+
+新浪jquery cdn加速点
+http://lib.sinaapp.com/js/jquery/1.7.2/jquery.min.js
+
+你还可以这样写，第一个首选，如果加载失败js就会加载第二个地址
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript">
+!window.jQuery && document.write('<script src=http://lib.sinaapp.com/js/jquery/1.7.2/jquery.min.js><\/script>');
+</script>
+
+
+
+
+http://a.tbcdn.cn/kissy/1.0.0/build/imglazyload/imglazyload-min.js 
+
+
+VMware Workstation 11序列号：
+1F04Z-6D111-7Z029-AV0Q4-3AEH8

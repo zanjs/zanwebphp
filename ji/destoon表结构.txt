@@ -1,0 +1,197 @@
+表名  					注释
+
+destoon_404 404 			日志 
+
+destoon_ad 				广告 
+
+destoon_ad_place 			广告位
+
+destoon_admin 				管理员
+
+destoon_admin_log 			管理日志
+
+destoon_alert 				贸易提醒 
+
+destoon_announce 			公告
+
+destoon_area 				地区
+
+destoon_article_21 			资讯
+
+destoon_article_data_21 		资讯内容 
+
+destoon_ask 				客服中心
+
+destoon_banip 				IP禁止
+
+destoon_banword 			词语过滤
+
+destoon_brand 				品牌
+
+destoon_brand_data			品牌内容
+
+destoon_buy 				求购
+
+destoon_buy_data 			求购内容
+
+destoon_category 			栏目 
+
+destoon_comment 			评论
+
+destoon_comment_ban 			评论禁止
+
+destoon_comment_stat 			评论统计 
+
+destoon_company 			公司
+
+destoon_company_data 			公司内容
+
+destoon_company_setting 		公司设置
+
+destoon_count 				缓存统计
+
+destoon_down 				下载
+
+destoon_down_data 			下载内容
+
+destoon_exhibit 			展会
+
+destoon_exhibit_data 			展会内容
+
+destoon_favorite 			商机收藏
+
+destoon_fetch 				单页采集
+
+destoon_fields 				自定义字段
+
+destoon_finance_card 			充值卡
+
+destoon_finance_cash 			申请提现
+
+destoon_finance_charge 			在线充值
+
+destoon_finance_credit 			积分流水
+
+destoon_finance_pay 			支付记录
+
+destoon_finance_promo 			优惠码 
+
+destoon_finance_record 			财务流水
+
+destoon_finance_sms 			短信增减
+
+destoon_finance_trade 			交易记录
+
+destoon_friend 				我的商友
+
+destoon_group 				会员组
+
+destoon_guestbook 			留言本
+
+destoon_honor 				荣誉资质
+
+destoon_info_22 			招商
+
+destoon_info_data_22 			招商内容
+
+destoon_job 				招聘
+
+destoon_job_apply 			应聘工作
+
+destoon_job_data 			招聘内容
+
+destoon_job_talent 			人才库
+
+destoon_keylink 			关联链接
+
+destoon_keyword 			关键词
+
+destoon_know 				知道 查看
+
+destoon_know_answer 			知道回答
+
+destoon_know_data 			知道内容
+
+destoon_know_vote 			知道投票
+
+destoon_link 				友情链接
+
+destoon_login 				登录日志
+
+destoon_mail 				邮件订阅
+
+destoon_mail_list 			订阅列表
+
+destoon_member 				会员
+
+destoon_message 			站内信件
+
+destoon_module 				模型
+
+destoon_news 				公司新闻
+
+destoon_news_data 			公司新闻内容
+
+destoon_photo 				图库
+
+destoon_photo_data 			图库内容
+
+destoon_photo_item 			图库图片
+
+destoon_question 			验证问题
+
+destoon_quote 				行情
+
+destoon_quote_data 			行情内容
+
+destoon_quote_product 			行情产品
+
+destoon_resume 				简历
+
+destoon_resume_data 			简历内容
+
+destoon_sell 				供应
+
+destoon_sell_data 			供应内容
+
+destoon_sell_option 			产品属性
+
+destoon_sell_product 			产品名称
+
+destoon_sell_value 			产品属性值
+
+destoon_session 			SESSION
+
+destoon_setting 			网站设置
+
+destoon_sms 				短信记录
+
+destoon_special 			专题
+
+destoon_special_data 			专题内容
+
+destoon_special_item 			专题信息
+
+destoon_spread 				排名推广
+
+destoon_spread_price 			排名起价
+
+destoon_style 				公司主页模板
+
+destoon_type 				分类 
+
+destoon_upgrade 			会员升级
+
+destoon_upload 				上传记录
+
+destoon_validate 			资料认证
+
+destoon_video 				视频
+
+destoon_video_data 			视频内容
+
+destoon_vote 				投票
+
+destoon_vote_record 			投票记录
+
+destoon_webpage 			单网页

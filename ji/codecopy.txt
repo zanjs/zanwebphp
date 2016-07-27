@@ -1,0 +1,256 @@
+HCQ9D-TVCWX-X9QRG-J4B2Y-GR2TT  xp
+
+js》行为
+html：结构体系
+css：外观展现
+
+toLowerCase() ------ 将字符串中的所有字符都转换成小写； 
+toUpperCase() ------ 将字符串中的所有字符都转换成大写；
+
+filter: alpha(opacity=60);
+-moz-opacity: 0.60;
+opacity: 0.60;
+filter: progid:DXImageTransform.Microsoft.Alpha(opacity=60);
+
+强制 !important；
+
+div圆角
+border-radius: 25px;
+
+css3 动画缓冲变化
+	
+	-moz-transition: 1s; 
+	-webkit-transition: 1s; 
+	-o-transition: 1s;
+	transition:1s;
+
+变大
+
+ 
+    -moz-transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    transform: scale(1.1);
+
+旋转
+
+  transform: rotateZ(360deg);
+    -webkit-transform: rotateZ(360deg);
+    -moz-transform: rotateZ(360deg);
+
+大小变化css3
+-webkit-animation: 3s star-rotate 700ms infinite alternate;
+-moz-animation: 3s star-rotate 700ms infinite alternate;
+三、单个圆角的设置
+除了同时设置四个圆角以外，还可以单独对每个角进行设置。对应四个角，CSS3提供四个单独的属性：
+　　* border-top-left-radius
+　　* border-top-right-radius
+　　* border-bottom-right-radius
+　　* border-bottom-left-radius
+这四个属性都可以同时设置1到2个值。如果设置1个值，表示水平半径与垂直半径相等。如果设置2个值，第一个值表示水平半径，第二个值表示垂直半径。
+　　border-top-left-radius: 15px;
+IE 9、Opera 10.5、Safari 5、Chrome 4和Firefox 4，都支持上述的border-radius属性。早期版本的Safari和Chrome，支持-webkit-border-radius属性，早期版本的Firefox支持-moz-border-radius属性。
+目前来看，为了保证兼容性，只需同时设置-moz-border-radius和border-radius即可。
+　　-moz-border-radius: 15px;
+　　border-radius: 15px;
+（注意：border-radius必须放在最后声明，否则可能会失效。）
+另外，早期版本Firefox的单个圆角的语句，与标准语法略有不同。
+　　* -moz-border-radius-topleft（标准语法：border-top-left-radius）
+　　* -moz-border-radius-topright（标准语法：border-top-right-radius）
+　　* -moz-border-radius-bottomleft（标准语法：border-bottom-left-radius）
+　　* -moz-border-radius-bottomright（标准语法：border-bottom-right-radius）
+虽然各大浏览器都支持border-radius，但是在某些细节上，实现都不一样。当四个角的颜色、宽度、风格（实线框、虚线框等）、单位都相同时，所有浏览器的渲染结果基本一致；一旦四个角的设置不相同，就会出现很大的差异。比如，下面这段代码在不同的浏览器中，渲染结果就相差很大。
+　　border-color: black;
+　　border-style: solid dashed;
+　　border-width: 1px 2px 3px;
+　　border-top-color: red;
+　　border-radius: 5%;
+mailto:xxxxx@qq.com
+延迟加载
+ $(function(){
+	 	$("img.lazyimg").show().lazyload({effect : "fadeIn",threshold : 500});
+		$(window).bind("load", function() { 
+		var timeout = setTimeout(function() {$(".img2000").trigger("sporty")}, 3000);
+		var timeout = setTimeout(function() {$(".img4000").trigger("sporty")}, 4000);
+		var timeout = setTimeout(function() {$(".img5000").trigger("sporty")}, 5000);
+		var timeout = setTimeout(function() {$(".img6000").trigger("sporty")}, 6000);
+
+	 }}
+
+透明度：
+filter: alpha(opacity=60);
+-moz-opacity: 0.60;
+opacity: 0.60;
+filter: progid:DXImageTransform.Microsoft.Alpha(opacity=60);
+}
+透明色{
+background-color: transparent;
+}
+
+渐变
+$(function() { 
+   $("img:below-the-fold").lazyload({ 
+     event : "sporty" 
+   }); 
+}); 
+
+
+setTimeout 时间
+
+阴影：
+
+ text-shadow: 0px 0px 20px black;
+    /*box  x阴影  y阴影  10羽化  阴影颜色  */
+    box-shadow: 10px 10px 10px black ;
+
+
+$(window).bind("load", function() { 
+  var timeout = setTimeout(function(){$("img.lazy").trigger("sporty")}, 5000); 
+});
+
+
+js/jquery 实时监听输入框值变化的完美方案：oninput & onpropertychange  ;
+(1)     先说jquery, 使用 jQuery 库的话，只需要同时绑定 oninput 和 onpropertychange 两个事件就可以了，示例代码：
+
+$('#username').bind('input propertychange', function() {
+    $('#content').html($(this).val().length + ' characters');
+});
+
+　从上面表格可以看出，oninput 事件在 IE9 以下版本不支持，需要使用 IE 特有的 onpropertychange 事件替代，这个事件在用户界面改变或者使用脚本直接修改内容两种情况下都会触发，有以下几种情况：
+
+修改了 input:checkbox 或者 input:radio 元素的选择中状态， checked 属性发生变化。
+修改了 input:text 或者 textarea 元素的值，value 属性发生变化。
+修改了 select 元素的选中项，selectedIndex 属性发生变化。
+　　在监听到 onpropertychange 事件后，可以使用 event 的 propertyName 属性来获取发生变化的属性名称。
+
+　　集合 oninput & onpropertychange 监听输入框内容变化的示例代码如下：
+ <head>
+    <script type="text/javascript">
+    // Firefox, Google Chrome, Opera, Safari, Internet Explorer from version 9
+        function OnInput (event) {
+            alert ("The new content: " + event.target.value);
+        }
+    // Internet Explorer
+        function OnPropChanged (event) {
+            if (event.propertyName.toLowerCase () == "value") {
+                alert ("The new content: " + event.srcElement.value);
+            }
+        }
+    </script>
+</head>
+<body>
+    Please modify the contents of the text field.
+    <input type="text" oninput="OnInput (event)" onpropertychange="OnPropChanged (event)" value="Text field" />
+</body>
+
+
+css实现强制不换行/自动换行/强制换行
+
+white-space:nowrap;
+
+
+
+jquery如何判断某元素是否具备指定的样式
+
+$(document).ready(function(){ 
+
+   
+
+
+   	$(".msunList li a.fuwuaa").click(function(){ 
+		if($(this).attr("class").indexOf("on")>0){ 
+		$(this).removeClass("on") 
+		}else{ 
+		$(this).addClass("on") 
+		} 
+		}); 
+ });
+
+
+
+
+
+以上的朋友解决是已知高度的垂直居中。我现在发一个未知高度的垂直居中
+翻译：forestgan（转载）
+
+尽管有CSS的vertical-align特性，但是并不能有效解决未知高度的垂直居中问题（在一个DIV标签里有未知高度的文本或图片的情况下）。
+
+标准浏览器如Mozilla, Opera, Safari等.，可将父级元素显示方式设定为TABLE(display: table;) ，内部子元素定为table-cell (display: table-cell),通过vertical-align特性使其垂直居中，但非标准浏览器是不支持的。
+
+非标准浏览器只能在子元素里设距顶部50%，里面再套个元素距顶部-50% 来抵消。
+
+CSS 
+body {padding: 0; margin: 0;}
+body,html{height: 100%;}
+#outer {height: 100%; overflow: hidden; position: relative;width: 100%; background:ivory;}
+#outer[id] {display: table; position: static;}
+#middle {position: absolute; top: 50%;} /* for explorer only*/
+#middle[id] {display: table-cell; vertical-align: middle; position: static;}
+#inner {position: relative; top: -50%;width: 400px;margin: 0 auto;} /* for explorer only */
+div.greenBorder {border: 1px solid green; background-color: ivory;}
+xhtml
+<div id="outer">
+  <div id="middle">
+      <div id="inner" class="greenBorder">
+             </div>
+         </div>
+</div>
+以上CSS代码的优点是没有hacks，采用了IE不支持的CSS2选择器#value[id]。
+
+CSS2选择器#value[id]相当于选择器#value，但是Internet Explorer不支持这种类型的选择器。同样地.value[class]，相当于.value,这些只有标准浏览器能读懂。
+
+测试：Firefox1.5、Opera9.0、IE6.0、IE5.0通过。上面的代码不支持IE7，还需要在最下面加二句：
+
+*+html #outer[id]{position: relative;}
+*+html #middle[id]{position: absolute; }
+
+
+jquery cdn：
+
+
+<script type="text/javascript">
+$("#pageNav>ul>li>a").each(function() {
+    if ($(this).attr("href").toLowerCase().replace(/\/|[&#].*/g,"") == document.URL.toLowerCase().replace(/\/|[&#].*/g,"")){
+        $(this).attr("class","current"); //给当前页的<a>加上class="current"，如<a class="current">首页</a>
+    }
+});
+</script>
+
+
+;(function() {
+    var links = document.querySelectorAll('#nav a'),
+        path = document.location.pathname;
+    for (var i = 0, item; item = links[i]; i++) {
+        if (path.indexOf( item.getAttribute('href') ) === 1) {
+            item.className = 'current';
+            break;
+        }
+    }
+})();
+
+多备份
+设备ID：
+D050990A7825-4931646221425018997
+
+密   匙：g>UC[>ZRHaMD2S31
+
+以下是resize属性的的各个取值:
+none：用户不能操纵机制调节元素的尺寸；
+both：用户可以调节元素的宽度和高度；
+horizontal：用户可以调节元素的宽度；
+vertical：让用户可以调节元素的高度；
+inherit：默认继承。
+
+
+on 方法
+$(document).on("click", ".waiting-save", function () {
+ $(this).html('@T("Saving...")')
+     $(this).attr("disabled", "");
+     SaveAction(this);
+   });
+delegate
+
+$ ("ul").delegate ("li", "dblclick", function ()
+{
+    $ (this).remove ();
+});

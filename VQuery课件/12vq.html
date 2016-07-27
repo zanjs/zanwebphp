@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<script src="vquery.js"></script>
+<script>
+
+//$.extend()
+
+//$.fn.extend()
+
+//var str = '  hello   ';
+//alert( '('+ $.trim(str) + ')' );   //hello
+
+$.extend({
+	aaa : function(){
+		alert(1);
+	},
+	bbb : function(){
+		alert(2);
+	}
+});
+
+
+$.aaa();  //1
+$.bbb();  //2
+
+$.fn.extend({
+	aaa : function(){
+		alert(3);
+		return this;
+	},
+	bbb : function(){
+		alert(4);
+		return this;
+	}
+});
+
+//$().aaa();  //3
+//$().bbb();  //4
+
+$().aaa().bbb();
+</script>
+</head>
+
+<body>
+</body>
+</html>

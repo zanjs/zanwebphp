@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style>
+#div1{ width:100px; height:100px; background:red;}
+</style>
+<script src="vquery.js"></script>
+<script>
+
+
+$(function(){
+	
+	$('#div1').hover(function(){
+		
+		//this.style.background = 'yellow';
+		$(this).css({background : 'yellow'});
+		
+	},function(){
+		
+		//this.style.background = 'red';
+		$(this).css('background','red');
+		
+	});
+	
+	
+});
+
+
+
+
+</script>
+</head>
+
+<body>
+<div id="div1"></div>
+
+</body>
+</html>

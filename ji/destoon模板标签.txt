@@ -1,0 +1,385 @@
+1.全局标签
+
+网站名称:{$DT[sitename]}
+
+网站地址:{DT_PATH}
+
+网站LOGO: {if $MODULE[$moduleid][logo]}{DT_SKIN}image/logo_{$moduleid}.gif{elseif $DT[logo]}{$DT[logo]}{else}{DT_SKIN}image/logo.gif{/if}
+
+版权信息:{$DT[copyright]}
+
+风格路径:{DT_PATH}
+
+客服电话:{$DT[telephone]}
+
+ICP备案号:{if $DT[icpno]}<a href=”xxxcom” target=”_blank”>{$DT[icpno]}</a> ┊ {/if}
+
+VIP会员名称:{VIP}
+
+真实货币名称:{$DT[money_name]}
+
+真实货币单位:{$DT[money_unit]}
+
+虚拟积分名称:{$DT[credit_name]}
+
+虚拟积分单位:{$DT[credit_unit]}
+
+Title(网站标题):{$seo_title}
+
+Meta Keywords(网页关键词):{$head_keywords}
+
+Meta Description(网页描述):{$head_description}
+
+2.连接地址
+
+默认各个模块连接:
+
+会员:{$MODULE[2][linkurl]}   
+
+供应:{$MODULE[5][linkurl]}    
+
+求购:{$MODULE[6][linkurl]}    
+
+行情:{$MODULE[7][linkurl]}      
+
+公司:{$MODULE[4][linkurl]}    
+
+展会:{$MODULE[8][linkurl]}     
+
+资讯:{$MODULE[21][linkurl]}      
+
+招商:{$MODULE[22][linkurl]}     
+
+品牌:{$MODULE[13][linkurl]}  
+
+人才:{$MODULE[9][linkurl]}      
+
+知道:{$MODULE[10][linkurl]}     
+
+专题:{$MODULE[11][linkurl]}   
+
+图库:{$MODULE[12][linkurl]}
+
+视频:{$MODULE[14][linkurl]}
+
+下载:{$MODULE[15][linkurl]}
+
+发布信息:{$MODULE[2][linkurl]}{$DT[file_my]}
+
+企业商铺:{$MODULE[2][linkurl]}home.php
+
+查看站内信:{$MODULE[2][linkurl]}message.php
+
+管理买卖交易:{$MODULE[2][linkurl]}trade.php
+
+完善企业资料:{$MODULE[2][linkurl]}edit.php?tab=2
+
+注册:{$MOD[linkurl]}{$DT[file_register]}
+
+登录:{$MODULE[2][linkurl]}{$DT[file_login]}
+
+找回密码:{$MOD[linkurl]}send.php
+
+VIP页面:{$MODULE[2][linkurl]}grade.php
+
+WAP浏览:{if extend_setting(‘wap_enable’)} <a href=”{extendurl(‘wap’)}”>WAP浏览</a>{/if}
+
+RSS订阅:{if extend_setting(‘feed_enable’)} | <a href=”{extendurl(‘feed’)}”>RSS订阅</a>{/if}
+
+行情速递:{$MODULE[7][linkurl]}{rewrite(‘price.php?product=all’)}
+
+企业新闻:{$MODULE[4][linkurl]}{rewrite(‘news.php?more=1′)}
+
+公告:{extendurl(‘announce’)}
+
+推广:{extendurl(‘spread’)}
+
+广告:{extendurl(‘ad’)}
+
+友情链接:{extendurl(‘link’)}
+
+申请友情链接:{extendurl(‘link’)}{rewrite(‘index.php?action=reg’)}
+
+留言本:{extendurl(‘guestbook’)}
+
+投票:{extendurl(‘vote’)}
+
+3.首页调用
+
+导航菜单:
+
+<ul>
+
+<li{if $moduleid<4}{/if}><a href=”{DT_PATH}”><span>首页</span></a></li>
+
+{loop $MODULE $m}
+
+{if $m[ismenu]}
+
+<li{if $m[moduleid]==$moduleid}{/if}><a href=”{$m[linkurl]}”{if $m[isblank]} target=”_blank”{/if}><span{if $m[style]} style=”color:{$m[style]};”{/if}>{$m[name]}</span></a></li>
+
+{/if}
+
+{/loop}
+
+</ul>
+
+调用登录模块:
+
+ {if $DT[page_login]}
+
+ {template ‘user’, ‘chip’}
+
+ {/if}
+
+调用分类模块:
+
+  {php $mid = 5;}
+
+  {template ‘catalog’, ‘chip’}
+
+4.各个模块数据的调用
+
+供应:
+
+最新供应信息:
+
+1.<!–{tag(“moduleid=5&condition=status=3&length=34&condition=status=3&pagesize=5&order=addtime desc&template=list-trade”)}–>
+
+2.<!–{php $tags=tag(“moduleid=5&condition=status=3&length=34&condition=status=3&pagesize=5&order=addtime desc&template=null”);}–>
+
+{loop $tags $k $t}
+
+<li><span>[{area_pos($t[areaid], ‘/’, 1)}]</span><a href=”{$t[linkurl]}” target=”_blank” title=”{$t[alt]}”>{$t[title]}</a></li>
+
+{/loop}
+
+签调用理论上需要网站管理人员有一定的HTML+CSS知识,并对PHP+MySQL有初步的了解。
+
+调用过程实际是按照调用条件从数据表读取调用数量条数据,并依排序方式排序,最终通过标签模板的布局输出数据。
+
+函 数原型 tag($parameter, $expires = 0) $parameter 表示传递给tag函数的字符串,系统自动将其转换为多个变 量 例如传递 table=destoon&pagesize=10,系统相当于得 到$table = ‘destoon’;$pagesize = 10;
+
+两个变量 $expires 表示缓存过期时间 >0 缓存$expires秒;0 &ndash; 系统默认时间;-1 &ndash; 不缓存;-2 &ndash; 缓存SQL;一般情况保持默认即可。
+
+变量 $tags 以数组类型保存标签调用的数据,可通过loop语法遍历显示。
+
+$pages 保存数据分页代码,仅在调用了分页时有效。 $
+
+path 模块路径。 常用字段 title 标题; linkurl 链接; catid 分类ID; introduce 简介; addtime 添加时间;
+
+常用函数 dsubstr($string, $length, $suffix = ”) 将字符串$string截取为$length长,尾部追加$suffix(例如..)
+
+set_style($string, $style = ”, $tag = ‘span’) 将 字符串$string置于$tagHTML标签中并设置style为$style linkurl($linkurl, $absurl = 0) 将相 对路径$linkurl修补为绝对路径(防止链接错误)
+
+date($format, $timestamp) 将时间戳$timestamp转化为$format(例如Y-m-d)格式
+
+标签模板 模板保存于./template/default/tag/目录; 建议不要删除或者修改自带的模板,推荐在自带模板基础上新建模板并应用。
+
+Category:Destoon标签调用
+
+Comments (0)
+
+destoon显示地区Posted byjinpeng998on 星期一, 12 07月, 2010
+
+显示地区:
+
+需要的函数是 include/module.func.php/get_mainarea($areaid, $area);
+
+php页面:$AREA=cache_read(‘area.php’); //读取缓存文件
+
+静态页面调用: <table width=”100%” cellpadding=”3&Prime;>
+
+{php $mainarea = get_mainarea(0, $AREA)}
+
+{loop $mainarea $k $v}
+
+{if $k%2==0}<tr>{/if}
+
+<td><a href=”{$MOD[linkurl]}{rewrite(‘search.php?areaid=’.$v['areaid'].’&typeid=’.$typeid)}”>{$v[areaname]}</a></td>
+
+{if $k%2==1}</tr>{/if}
+
+{/loop}
+
+</table>
+
+还有一种方法就是 直接标签调用,,不错的,直接从destoon数据库里取出信息
+
+Category:Destoondestoon显示地区
+
+Comments (0)
+
+destoon 学习标签调用Posted byjinpeng998on 星期日, 11 07月, 2010
+
+链接:$t[linkurl]
+
+供应模块 更多:$MODULE[---模块ID---][linkurl] 模块ID把 鼠标放在其下链接上 出现 moduleid=? 就能看到
+
+图片路径:$t
+
+;
+
+资讯模块 更多:{$MOD[linkurl]}{$c[linkurl]}
+
+查看 名称是属于哪个字段?——选中&ndash;右键—看name值 eg name=post[brand] 即为brand字段
+
+每个模块的首页 都是其 template/文件夹下的 index.htm
+
+pagesize=”.$MOD[pagesize].” 可写成 pagesize=4;记住不要加 单引号 or 双引号
+
+调用分页:
+
+分页标签:
+
+<!&ndash;{tag(“moduleid=$moduleid&c=3
+
+$dtype&catid=$catid&pagesize=4&page=$page&showpage=1&datetype=5&order=”.$MOD[order].”&template=list-sell”)}&ndash;>
+
+分页:{if $showpage && $pages}<div class=”pages”>{$pages}</div>{/if}
+
+调用分类:
+
+主要方法
+
+$maincat = get_maincat(0, $CATEGORY);
+
+get_maincat(0, $CATEGORY)——在include/global_func.php 中
+
+$childcat = get_maincat(0, $CATEGORY, 1);— 调用超级栏目下的1级目录
+
+0 代表 最最根目录 1代表 level为1的目录 level 手动设置 默认都为1
+
+如果0改为3 则为 catid 为3 的目录
+
+小注意:$CATEGORY = cache_read(‘category-’.$moduleid.’.php’);此文件在模块页的common.inc.php页面中
+
+调用
+
+{loop $maincat $k $v}
+
+{if $k%$DT[page_subcat]==0}<tr>{/if}
+
+<td>
+
+<a href=”{$MOD[linkurl]}{$v[linkurl]}”>{set_style($v[catname],$v[style])}</a> <span>({$ITEMS[$v[catid]]})</span>
+
+</td>
+
+{if $k%$DT[page_subcat]==($DT[page_subcat]-1)}</tr>{/if}
+
+{/loop}
+
+注意:
+
+在其模块 module 文件夹下的 php页面里必须有 $maincat
+
+$MOD[linkurl] 是模块也首页地址 $v[linkurl]其下列表页 加 catid
+
+Category:Destoon标签调用
+
+Comments (0)
+
+非常好的Destoon B2B标签调用手册Posted byjinpeng998on 星期日, 11 07月, 2010
+
+Destoon B2B标签调用手册什么是标签调用?
+
+标签调用是根据调用条件(condition)从数据表(table)读取调用数量(pagesize)条数据,并按排序方式(order)排序,最终通过标签模板的布局输出数据。
+
+可以看出,标签的工作分两个部分,一是读取数据,二是显示数据。
+
+标签函数原型
+
+标签函数保存于 include/tag.func.php
+
+tag($parameter, $expires = 0)
+
+$parameter 表示传递给tag函数的字符串,系统自动将其转换为多个变量
+
+例如传递 table=destoon&pagesize=10&hello=world
+
+系统相当于得到
+
+$table = ‘destoon’;
+
+$pagesize = 10;
+
+$hello = ‘world’;
+
+三个变量
+
+$expires 表示标签缓存过期时间
+
+>0 缓存$expires秒;0 &ndash; 系统默认标签缓存时间;-1 &ndash; 不缓存;-2 &ndash; 缓存SQL结果;
+
+一般情况保持默认不需要传递。
+
+数据读取过程
+
+例如以下标签:
+
+<!&ndash;{tag(“table=sell&c=3&order=addtime desc&pagesize=10&Prime;)}&ndash;>
+
+会被转换为如下的SQL语句:
+
+SELECT *
+
+FROM destoon_sell
+
+WHERE status=3
+
+ORDER BY addtime DESC
+
+LIMIT 0,10
+
+读出的数据会保存在 $tags 数组里
+
+数据显示过程
+
+1、通过标签模板显示传递&template=abc给标签函数,例如:<!&ndash;{tag(“table=…&template=abc”)}&ndash;>默认的标签模板保存在模板目录/tag/目录里,例如&template=abc将调用模板目录/tag/abc.htm模板来显示数据如果标签模板放于其他目录,例如def,则传递&dir=def&template=abc,系统将调用模板目录/def/abc.htm模板
+
+2、直接在模板里循环数据<!&ndash;{php $tags=tag(“table=…&template=null”);}&ndash;>此写法传递标签模板为null,并且直接返回数据给$tags数组,此时可以直接在模板里循环了以下为一个完整的示例:<!&ndash;{php $tags=tag(“table=…&template=null”);}&ndash;>{loop $tags $t}…{/loop>
+
+第一种写法一般用于多次调用的数据,第二种写法一般用于只调用一次的数据。常用参数及含义moduleidmoduleid指模块ID,可在后台模块管理里查询。对于直接调用模块的数据,设置正确的模块ID后,将不需要传递table参数,系统会自动获取。例如传递moduleid=5,系统将识别为调用供应信息,自动设置table参数为selltabletable指表名,可在后台数据库维护里查询。对于Destoon系统表,不需要加表的前缀;对于非Destoon系统表,需要填写完整的表名,且传递prefix参数例如对于Destoon系统表,传递table=sell,如果表前缀为destoon_,系统将识别表名为 destoon_sell对于非Destoon系统表,传递table=tb_abc&prefix=或者table=abc&prefix=tb_,系统将识别表名为 tb_abcfieldsfields指查询的字段,默认为星号。可以传递例如 fields=title,addtime,但是一般情况下无需传递,Destoon独有的标签缓存机制会自动缓存查询结果,不必担心效率问题。
+
+orderorder指数据的排序方法(此项需了解SQL语法)。例如order=addtime desc表示按添加时间降序排列、order=itemid desc表示按itemid降序排列、order=rand()表示随机数据等。pagesizepagesize指调用数据的数量,如果不传递,默认为10。
+
+templatetemplate指指定的标签模板,如果不传递,默认为list,位于模板目录/tag/list.htm,如果传递为null,表示不应用标签模板。参见上述数据显示过程。其他常见用法举例控制标题长度在标签里传递length参数,例如&length=20表示20个字符长度(GBK一个汉字占2个字符,UTF-8一个汉字占3个字符),一般情况建议用css隐藏多余字符(定义height和overflow:hidden)传递length参数,系统仅对title字段自动截取,如果需要截取其他字段,可用dsubstr函数例如 {dsubstr($t[company], 20, ‘…’)} 表示截取company字段为20个字符,截取后,结尾追加…设置日期显示格式可以在标签里传递datetype参数:
+
+1 表示 年;2 表示 月-日;3 表示 年-月-日;4 表示 月-日 时:分;5 表示 年-月-日 时:分;6 表示 年-月-日 时:分:秒也可以在模板里直接使用date函数,例如{date(‘Y-m-d’, $t[addtime])} 表示将时间转换为 年-月-日 格式调用某一分类的信息在标签里传递catid参数,例如&catid=5表示调用分类ID为5的所有信息。如果调用多个分类,用逗号分隔分类ID,例如 &catid=5,6,7表示调用分类ID为5、6、7的所有信息。分类调用默认包含子分类的信息,如果不需要包含子分类,可设置&child=0参数。例如&catid=5&child=0表示只调用分类ID为5的信息,不包括子分类的信息。调用某一地区的信息调用地区信息和上述调用分类信息的方法完全相同,将其中的catid换为areaid即可。显示信息所在分类<a href=”{$MODULE[$moduleid][linkurl]}{$CATEGORY[$t[catid]][linkurl]}”>{$CATEGORY[$t[catid]][catname]}</a>控制列数此项常用于图片的布局,可使用cols参数。例如调用12张图片,一行显示4个,共3行,则传递&pagesize=12&cols=4支持cols参数的标签模板限thumb-table.htm和list-table.htm其中,thumb-table.htm显示图片列表,list-table.htm显示文字列表如果新建支持cols的标签模板或直接循环$tags,可参考以上两个模板的写法上述效果可以也可以通过CSS实现,无需使用表格,请自行书写显示文章的简介使用{$t[introduce]}变量,如果要截取字数,例如80字符,可使用{dsubstr($t[introduce], 80, ‘…’)}小结标签看似复杂难懂,实际上在理解各个参数的含义和调用流程后,您会了解到标签实际简单自由、灵活易用、功能强大。默认模板里已提供了大量的调用范例和标签模板,可以在学习中参阅和调试。标签调用是制作模板必备的知识,希望您能早日掌握。
+
+第二部
+
+1.标签格式的大致说明<!–{tag
+
+(“moduleid=9&table=article_9&length=40&condition=status=3&pagesize=
+
+10&datetype=2&order=ad
+
+dtime desc&target=_blank”)}–>
+
+moduleid=9是资讯模块ID, 模块ID去模块管理查看;article是资讯模块目录名;&length=40是标签截取字数&pagesize=10是调用条数&datetype=2是显示时间添加时间
+
+2.调用最新加入企业<!–{tag(“moduleid=4&table=company&condition=groupid>4&pagesize=10&order=userid desc&template=list-com”)}–>3.如何调用其中一个企业会员的供求信息及资讯在condition=里加 and username=’xxx’ xxx为会员登录名
+
+4.如何调用 供应 求购 产品 下的 某个分类调用分类下的信息可以设置 &catid=行业id&child=1 child=1表示同时调用下属的行业5.调用二级栏目信息列表<!–{tag(“moduleid=$moduleid&table=article_$moduleid&catid=$catid&child=1&condition=status=3&order=”.$MOD[order].”&pagesize=6&datetype=2&target=_blank”)}–>如果你是在文章模块里调用 可以用上面的代码 $catid 改为你要调用的栏目id即可如果需要同时调用栏目下的信息 child=1即可 否则 child=0如果是在网站其他地方调用,可以用下面的代码:<!–{tag
+
+(“moduleid=9&table=article_9&catid=$catid&child=1&condition=status=3&order=addtime
+
+desc&pagesize=6&datetype=2&target=_blank”)}–>注意moduleid的值要与你调用的模块id保持一致补充:下面这个在首页调用成功<!–{tag
+
+(“moduleid=9&table=article_9&catid=$catid&child=1&condition=status=3&order=addtime
+
+desc&pagesize=6&datetype=2&target=_blank”)}–>但是我想要资讯页内部的模版列表,也就是每条只显示22个字。6.首页资讯栏目这里怎么调用“9”为你模块的ID{php $C = get_maincat(0, cache_read(‘category-9.php’));}{loop $C $k $v}<a href=”{$MODULE[9][linkurl]}{$v[linkurl]}”>{$v[catname]}</a>{/loop}7.公司列表 不能控制字数!!你可以直接修改 list-com.htm{$t[company]} 为 {dsubstr($t[company], $length)}8.TAG常用标签{$CATEGORY[$t[catid]]['catname']} 所属栏目名称; {timetodate($t['addtime'], $datetype)}
+
+发布时间9.其他你可以通过&template= 来指定标签模版如果没用这个参数 默认是list位于模版目录tag目录资讯 级别level 1级为 推荐文章 ;2级为 幻灯图片;3级为 推荐图文;4级为 头条文章;5级为 头条相关10,下面讲一下,在公司模板首页与列表页面调用出该公司的电话以及号码等各个标签属性时,怎样调用出来在list-company.htm页面加入
+
+<li class=”f_gray”>主营:{$t[business]}</li>
+
+<li class=”f_gray”>地址:{$t[address]}</li>
+
+<li class=”f_gray”>电话:{$t[telephone]}</li>
+
+<li class=”f_gray”>传真:{$t[fax]}</li>
+
+<li class=”f_gray”>邮箱:{$t[mail]}</li>

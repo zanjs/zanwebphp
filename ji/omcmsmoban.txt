@@ -1,0 +1,276 @@
+模版样式套用：
+{SITE_URL}
+当前站点url地址
+{$SITE.2.SITE_URL}
+站点2的url地址
+{MEMBER_URL}
+会员中心url地址
+{MEMBER_PATH}
+会员中心的路径
+{MEMBER_THEME}
+会员中心风格名称
+{MEMBER_TEMPLATE}
+会员中心模板名称
+{MEMBER_THEME_PATH}
+会员中心风格路径
+{HOME_THEME_PATH}
+站点风格路径
+{SPACE_URL}
+空间聚合页面url（限制本页）
+{SPACE_THEME_PATH}	空间聚合页面风格路径（限制本页）
+{MODULE_URL}
+模块的url地址（限制模块页）
+{MODULE_NAME}
+模块的名称（限制模块页）
+{MODULE_TITLE}
+模块的SEO标题（限制模块页）
+{MODULE_THEME_PATH}
+模块的风格路径（限制模块页）
+$member
+当前登录的会员信息数组
+$SITE
+全部站点信息数组
+
+ sql 语句替换|：
+
+UPDATE om_1_news SET thumb = REPLACE( thumb, 'http://ruiquan.in/', 'http://ruiquan123.cn81.omooo.net/' );
+UPDATE om_1_news_data_0 SET content = REPLACE( content, 'http://ruiquan.in/', 'http://ruiquan123.cn81.omooo.net/' );
+UPDATE om_1_product SET thumb = REPLACE( thumb, 'http://ruiquan.in/', 'http://ruiquan123.cn81.omooo.net/' );
+UPDATE om_1_product_data_0 SET content = REPLACE( content, 'http://ruiquan.in/', 'http://ruiquan123.cn81.omooo.net/' );
+UPDATE om_1_workshop SET thumb = REPLACE( thumb, 'http://ruiquan.in/', 'http://ruiquan123.cn81.omooo.net/' );
+UPDATE om_1_workshop_data_0 SET content = REPLACE( content, 'http://ruiquan.in/', 'http://ruiquan123.cn81.omooo.net/' );
+UPDATE om_1_page SET urllink=REPLACE(urllink,'http://ruiquan.in/','http://ruiquan123.cn81.omooo.net/');
+UPDATE om_1_page SET content=REPLACE(content,'http://ruiquan.in/','http://ruiquan123.cn81.omooo.net/');
+UPDATE om_1_page SET url=REPLACE(url,'http://ruiquan.in/','http://ruiquan123.cn81.omooo.net/');
+UPDATE om_1_navigator SET url=REPLACE(url,'http://ruiquan.in/','http://ruiquan123.cn81.omooo.net/');
+
+{$markrule}
+当前的登录的会员权限标志
+$member_rule	当前会员的权限规则数组
+$module_rule	当前会员在当前模块的权限规则数组
+你也可以手动调用时间：dr_date($_updatetime, "Y年m-d")
+首页幻灯片
+面包：{dr_catpos($catid, ' > ')} > {$title} 
+栏目名称：{CATEGORY.$catid.name}
+
+栏目搜索：<input name="catid" type="hidden" value="{$catid}"> 
+/模块/index.php?c=search&catid=栏目id
+
+
+面包模式 
+{list action=navigator type=4 num=10}
+                    <div class="{if $key==0}dis{else}undis{/if}" name="f">
+                    <a href="{$t.url}" title="{$t.title}" {if $t.target}target="_blank"{/if}><img alt="{$t.name}" style="width:710px;height:281px;" src="{dr_thumb($t.thumb, 710, 280)}" border="0"></a>
+                    </div>
+                    {/list}
+
+首页新闻
+<!--查询news模块的推荐位5（新闻焦点）的内容，field需要用到的字段（不填表示全部），按displayorder（后台指定排序）排序-->
+                    {list action=module module=news flag=5 field=thumb,title,url,description,updatetime order=displayorder,updatetime num=6}
+                    {if $key==0}
+                    <div class="left">
+                    	<a href="{$t.url}"><img src="{dr_thumb($t.thumb, 260, 225)}" height="225" /><div class="li_tit">{$t.title}</div></a>
+                    </div>
+                    <div class="right">
+						<ul>
+                        <li class="lione"><a href="{$t.url}" class="li_title" title="{$t.title}">{$t.title}</a><div class="intro">{dr_strcut($t.description, 90)}<a href="{$t.url}">[详细]</a></div></li>
+                    {else}
+                   		<li><span>{dr_date($t._updatetime, 'm-d')}</span><a href="{$t.url}" title="{$t.title}">{dr_strcut($t.title, 50)}</a></li>
+                    {/if}时间
+                    {/list}
+
+
+
+  {list catid=$catid page=$page order=updatetime more=1}
+          {php $downdata=string2array($t['downdata']);}
+          <li>
+            <span>                  
+                 {loop $downdata['file'] $k=>$file} 
+                  <a href="{downfile($file)}"><img border="0" align="absmiddle" src="{SITE_THEME}images/xz.jpg">下载产品资源</a><br>   
+                 {/loop}
+             </span>
+            <a href="{$t['url']}" title="{$t['title']}">{$t['title']}</a>
+          </li>
+
+
+内容页如何获得当前栏目名称和随机显示本栏目下的 8个 文章呢？
+
+希望使用过的大鸟们帮忙解决下……
+
+栏目名已经搞定  {$cat[catname]} 用这个代码即可 再次发布给更多的人了解！
+{CATEGORY.$catid.name}
+
+{$updatetime}
+ 内容时间
+随机显示本栏目下的 8个 文章 添加红色代码
+{list modelid=3 catid=$catid order=rand() num=4 thumb=1 cache=0}
+
+
+所有图片 调用
+
+{loop $images["file"] $t}{image($t)}|{/loop}
+<ul class="thumbListStlye4">
+                    <!--循环图片模型(modelid=2)中的数据-->
+                    {list modelid=2 thumb=1 order=updatetime num=8 cache=36000}
+                    {if $t[id]==22} //id等于22的单个图片文件
+                    <li>
+                        <div class="pe_u_thumb">
+                           <a href="{$t['url']}"><img src="{thumb($t['thumb'])}"></a>
+                           <div class="pe_u_thumb_title"><a href="{$t['url']}">{$t['title']}</a></div>
+                        </div>
+                    </li>
+
+                    {/if}
+                    {/list}
+                    </ul>
+
+
+多文件调用
+
+ {list action=module catid=27 page=$page order=updatetime more=1}
+
+		  {php $imgshow=dr_string2array($t['imgshow']);}
+		 {loop $imgshow $i $t}
+			<div class="apply_array">
+				<a href="{dr_thumb($t.file)}">
+					{$t.file}{$t.title}
+					<img src="{dr_thumb($t.file)}" alt="" />
+				</a>
+			</div>
+			 {/loop}
+			  {/list}{$error}
+         
+
+多文件字段
+http://help.dayrui.com/48.html
+{php $t['images']=dr_string2array($t['images']);}
+
+{dr_thumb($t['images'][0]['file'])}
+
+自动调用栏目名称 栏目目录
+ {$parent.name} <i>{$parent.dirname}</i>
+
+
+新窗口打开ie
+<script   language="JavaScript"   type="text/JavaScript">   
+  <!--   
+  var   imgObj;   
+  function   checkImg(theURL,winName){   
+  //   对象是否已创建   
+  if   (typeof(imgObj)   ==   "object"){   
+  //   是否已取得了图像的高度和宽度   
+  if   ((imgObj.width   !=   0)   &&   (imgObj.height   !=   0))   
+  //   根据取得的图像高度和宽度设置弹出窗口的高度与宽度，并打开该窗口   
+  //   其中的增量   20   和   30   是设置的窗口边框与图片间的间隔量   
+  OpenFullSizeWindow(theURL,winName,   ",width="   +   (imgObj.width+20)   +   ",height="   +   (imgObj.height+30));   
+  else   
+  //   因为通过   Image   对象动态装载图片，不可能立即得到图片的宽度和高度，所以每隔100毫秒重复调用检查   
+  setTimeout("checkImg('"   +   theURL   +   "','"   +   winName   +   "')",   100)   
+  }   
+  }   
+    
+  function   OpenFullSizeWindow(theURL,winName,features)   {   
+  var   aNewWin,   sBaseCmd;   
+  //   弹出窗口外观参数   
+  sBaseCmd   =   "toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,";   
+  //   调用是否来自   checkImg     
+  if   (features   ==   null   ||   features   ==   ""){   
+  //   创建图像对象   
+  imgObj   =   new   Image();   
+  //   设置图像源   
+  imgObj.src   =   theURL;   
+  //   开始获取图像大小   
+  checkImg(theURL,   winName)   
+  }   
+  else{   
+  //   打开窗口   
+  aNewWin   =   window.open(theURL,winName,   sBaseCmd   +   features);   
+  //   聚焦窗口   
+  aNewWin.focus();   
+  }   
+  }   
+  //-->   
+  </script>   
+
+
+
+$t=time(); 
+echo date("Y-m-d H:i:s",$t); 
+
+第一个参数的格式分别表示: 
+a - "am" 或是 "pm"  
+A - "AM" 或是 "PM"  
+d - 几日，二位数字，若不足二位则前面补零; 如: "01" 至 "31"  
+D - 星期几，三个英文字母; 如: "Fri"  
+F - 月份，英文全名; 如: "January"  
+h - 12 小时制的小时; 如: "01" 至 "12"  
+H - 24 小时制的小时; 如: "00" 至 "23"  
+g - 12 小时制的小时，不足二位不补零; 如: "1" 至 12"  
+G - 24 小时制的小时，不足二位不补零; 如: "0" 至 "23"  
+i - 分钟; 如: "00" 至 "59"  
+j - 几日，二位数字，若不足二位不补零; 如: "1" 至 "31"  
+l - 星期几，英文全名; 如: "Friday"  
+m - 月份，二位数字，若不足二位则在前面补零; 如: "01" 至 "12"  
+n - 月份，二位数字，若不足二位则不补零; 如: "1" 至 "12"  
+M - 月份，三个英文字母; 如: "Jan"  
+s - 秒; 如: "00" 至 "59"  
+S - 字尾加英文序数，二个英文字母; 如: "th"，"nd"  
+t - 指定月份的天数; 如: "28" 至 "31"  
+U - 总秒数  
+w - 数字型的星期几，如: "0" (星期日) 至 "6" (星期六)  
+Y - 年，四位数字; 如: "1999"  
+y - 年，二位数字; 如: "99"  
+z - 一年中的第几天; 如: "0" 至 "365"  
+其它不在上列的字符则直接列出该字符
+
+UPDATE om_1_page SET content=REPLACE(content,'http://junling.in/','http://junling123.cn81.omooo.net/');
+UPDATE om_1_page SET urllink=REPLACE(urllink,'http://zan.simi.in/','http://ceshi123.host6.omooo.net/');
+UPDATE om_1_page SET url=REPLACE(url,'http://zan.simi.in/','http://ceshi123.host6.omooo.net/');
+UPDATE om_1_navigator SET url=REPLACE(url,'http://zan.simi.in/','http://ceshi123.host6.omooo.net/');
+
+
+字段表
+
+邮件发送
+cron_model.php
+$this->sendmail_queue($this->form['setting']['send'], dr_lang('m-306', $this->form['name']), nl2br($content));
+
+
+
+omweb   的后台 操作使用过程中
+为了后台的美观性以及性能的提升，更友好的用户体验，请使用非ie内核浏览器，或者ie9以上高性能浏览器
+如果遇到后台的导航消失 ，请按住 ctrl + shift + del  三个键组合 删除全部缓存 ，如果遇到某些内容不出来，请按F5 刷新一次 ，重新请求加载一下内容 即可 如果还遇到以上问题，请打开浏览器，删除所有历史记录和缓存内容，关闭浏览器进程，重启启动一次浏览器。以达到浏览器的干净整洁。
+
+
+如果想要栏目删除权限 需要自己承担如果误删了某些栏目导致 网站前台数据找不到，则后果自己承担，网站栏目是不会经常变化的，网站内容可以随便删除。
+
+内容相关里面的 单页内容
+导航里面的 ->引导页导航 单个图片管理 
+文本链接内容 
+留言板管理
+
+各个模块栏目分类里面的 一级栏目 不可以删除
+
+以后内容均不可以删除，如果是客户误操作自己承担后果，
+后台一起操作都有记录。 
+
+以后是客户获得删除权限的须知！
+
+
+客户在发来的时候问一下 做的什么操作提示这样的信息 ， 
+我只能判断有 在后台一直停留长时间未操作 为了系统的安全性 会把客户登陆的账号注销掉 以防止有其他人操作。 
+还有就是 操作了不该操作的权限。
+
+
+后台的删除权限已经给客户啦 ！请遵循 获得删除权限的须知！
+
+另 提醒客户， 在后台操作的上传 资料的时候 时刻点击保存 以防止 电脑断电，断网，已经长时间未操作等。及时保存。
+
+
+ajax 图片：
+var url = '{SITE_URL}index.php?c=api&title=10&description=10&m=data2&format=jsonp&auth={md5(SYS_KEY)}&param=list action=module module=news order=updatetime num=10';
+
+
+附件大小：
+{php $data = get_attachment(3);}
+{dr_format_file_size($data.filesize)}

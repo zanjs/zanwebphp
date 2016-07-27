@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<script src="vquery.js"></script>
+<script>
+
+
+$(function(){
+	
+	var bBtn = true;
+	
+	$('#div1').on('click',function(){
+		
+		if(bBtn){
+			$('span').hide();
+		}
+		else{
+			$('span').show();
+		}
+		
+		bBtn = !bBtn;
+		
+	});
+	
+});
+
+
+
+
+</script>
+</head>
+
+<body>
+<div id="div1" class="box">aaaaa</div>
+<span>p</span>
+<span>p</span>
+<span>p</span>
+</body>
+</html>
